@@ -1,0 +1,14 @@
+import express from "express"
+import {upload} from "../midleware/multer.middelware.js"
+import { uploadFile } from "../controller/file.controller.js"
+import { authMiddleware } from "../midleware/auth.Middleware.js"
+import { extractContent } from "../controller/extraction.controller.js"
+
+
+const router = express.Router() 
+
+router.post("/upload",authMiddleware,upload.single("file"),uploadFile)
+router.post("/extract",authMiddleware,upload.single('screenshot'),extractContent)
+
+
+export default router
